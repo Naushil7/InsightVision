@@ -1,0 +1,17 @@
+# Virtual environments
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# FAISS and model files
+*.faiss
+*.pkl
+
+# Local environment
+.env
+
+# Streamlit & OS clutter
+.DS_Store
+*.log

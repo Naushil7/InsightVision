@@ -1,0 +1,11 @@
+# Core Libraries
+pymupdf
+pdf2image
+pytesseract
+Pillow
+faiss-cpu
+streamlit
+sentence-transformers
+requests
+python-dotenv
+werkzeug
