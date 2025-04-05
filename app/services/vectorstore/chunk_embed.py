@@ -5,7 +5,9 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Tuple
 
 # Load model once
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')  # lightweight, free
+# embedding_model = SentenceTransformer('all-MiniLM-L6-v2')  # lightweight, free
+embedding_model = SentenceTransformer('./models/all-MiniLM-L6-v2')
+
 
 def chunk_text(text: str, chunk_size: int = 300, overlap: int = 50) -> List[str]:
     """

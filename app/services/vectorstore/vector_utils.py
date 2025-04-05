@@ -4,7 +4,9 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Tuple
 
 # Load the same embedding model used for indexing
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+# embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+embedding_model = SentenceTransformer('./models/all-MiniLM-L6-v2')
+
 
 def load_faiss_index(index_path: str = "data/vectorstore/index.faiss") -> faiss.IndexFlatL2:
     """

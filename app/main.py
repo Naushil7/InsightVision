@@ -25,6 +25,14 @@ if uploaded_file:
         text = extract_text_smart(file_path)
     elif file_type == "image":
         text = extract_text_from_image(file_path)
+        if not text or len(text.strip()) < 50:
+            st.warning("🖼️ Not enough high-confidence text extracted.")
+            question = st.text_input("Ask a question based on OCR result:")
+            if question:
+                response = ask_mistral(text, question)
+                st.markdown("### 🤖 Mistral Answer:")
+                st.write(response)
+            st.stop()
     else:
         st.error("❌ Unsupported file type.")
         st.stop()
