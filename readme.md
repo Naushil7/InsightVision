@@ -2,7 +2,61 @@
 
 ![Status](https://img.shields.io/badge/status-deployed-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue) ![GCP](https://img.shields.io/badge/deployed%20on-Google%20Cloud%20Run-orange)
 
+🔗 **Live App**: [https://insightvision-18564642412.us-central1.run.app](https://insightvision-18564642412.us-central1.run.app)
+
 > InsightVision is a lightweight, cloud-deployable document understanding tool that extracts content from PDFs or images, semantically indexes it using embeddings, and allows LLM-powered question answering using Mistral.
+
+---
+
+## 🧠 Project Explanation
+
+### 🤔 Why Not Just Use an LLM Directly on PDFs?
+
+While LLMs like OpenAI’s GPT-4 can ingest PDFs directly, InsightVision is built with a more **structured and scalable pipeline** where the LLM plays a focused role:
+
+- ✅ The **LLM is not responsible for everything** — it’s only used at the end for answering questions.
+- 🔍 All the **heavy lifting (text extraction, cleaning, chunking, semantic search)** is done **before** the LLM is called.
+- 🧠 This means:
+  - Lower token usage (cheaper, faster)
+  - More contextually relevant answers
+  - Better explainability and modularity
+
+In contrast, uploading a PDF to an LLM treats the model as a black box — which might work for summaries, but falls short for precise querying, scalable architecture, and image-based documents.
+
+While it's tempting to directly send an entire PDF to an LLM, this approach has major limitations:
+
+- **Token Limits**: Most LLM APIs have strict context length restrictions (e.g., 4K to 32K tokens). Long PDFs easily exceed this.
+- **No Indexing**: LLMs don't inherently "understand" document structure or let you query specific parts semantically.
+- **OCR Blindness**: LLMs cannot process raw image scans or scanned text in PDFs.
+- **No Reuse**: Each query is a cold start — there's no persistent understanding or index.
+
+**InsightVision solves all of these** by:
+- Extracting and chunking text intelligently
+- Using **FAISS** to find only the most relevant content
+- Feeding only top-matching chunks into the LLM
+- Supporting **images and scanned PDFs** via OCR
+- Running offline-ready with local embeddings
+
+This pipeline is faster, smarter, more scalable, and cost-efficient than raw LLM usage.
+
+
+InsightVision was created to combine robust document understanding with the power of large language models — especially for analyzing resumes, scanned documents, academic PDFs, and images.
+
+### What it does:
+- Allows users to upload PDFs and images
+- Extracts high-quality text (with OCR fallback for images)
+- Embeds the extracted content using `SentenceTransformer`
+- Stores and searches via FAISS for semantic similarity
+- Passes top-matched context to the **Mistral API** to answer questions
+- Deployed as a **serverless Streamlit app on Google Cloud Run**
+
+This project emphasizes modularity, offline resilience (local model), and clean UI/UX via Streamlit. It’s designed to be both a robust ML pipeline and a showcase-ready portfolio project.
+
+---
+
+## 🖼️ Dashboard Preview
+
+![InsightVision UI](data/temp/Dashborad_Image.png)
 
 ---
 
