@@ -23,9 +23,9 @@ def embed_query(query: str) -> np.ndarray:
     return np.array(embedding).astype("float32")
 
 
-def search_index(index: faiss.IndexFlatL2, query_embedding: np.ndarray, k: int = 5) -> Tuple[np.ndarray, np.ndarray]:
+def search_index(index: faiss.IndexFlatL2, query_embedding: np.ndarray, top_k: int = 5) -> Tuple[np.ndarray, np.ndarray]:
     """
     Searches the FAISS index and returns distances and indices of top-k results.
     """
-    distances, indices = index.search(query_embedding, k)
+    distances, indices = index.search(query_embedding, top_k)
     return distances, indices
